@@ -33,8 +33,9 @@ The service prioritizes fast, non-blocking ingestion and fault tolerance:
 - Python 3.10+
 - PostgreSQL running locally
 
+```md
 ### Run Locally
-```bash```
+```bash
 git clone <repo-url>
 cd app
 python -m venv venv
