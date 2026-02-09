@@ -7,8 +7,9 @@ from app.models import Call
 from app.states import CallState
 
 async def process_call_ai(call_id: str):
+    await asyncio.sleep(5)
     retries = 5
-    delay = 1
+    delay = 5
 
     for _ in range(retries):
         try:
@@ -25,9 +26,14 @@ async def process_call_ai(call_id: str):
                 call = result.scalar_one()
 
                 call.state = CallState.PROCESSING_AI
+                await db.commit()          
+
+                await asyncio.sleep(5)     
+
                 call.transcription = "Mock transcription"
                 call.sentiment = "neutral"
                 call.state = CallState.ARCHIVED
+                await db.commit()
 
                 await db.commit()
             return
